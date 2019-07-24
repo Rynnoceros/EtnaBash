@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Calendar</title>
+	<link rel="stylesheet" href="Calendar_fichiers/font-awesome.css">
+	<link rel="stylesheet" href="Calendar_fichiers/prism-dark.css">
+	<link rel="stylesheet" href="Calendar_fichiers/readyplayerone.css">
+	<script type="text/javascript" src="Calendar_fichiers/prism.js"></script><script src="Calendar_fichiers/clipboard.js"></script>
+</head>
+<body>
+	<div class="panel panel-module">
+		<div class="panel-heading">Calendar</div>
+		<div class="panel-body">
+			<div>
+				<table>
+					<tbody><tr>
+						<th>Delivery</th>
+						<td>https://rendu-svn.etna-alternance.net/v2/2021_Piscine Distante Bachelor - Octobre_FDI-UNI1_5_0-4647/Day01/soubri_j/calendar/</td>
+					</tr>
+					<tr>
+						<th>File to delivery</th>
+						<td>calendar.sh</td>
+					</tr>
+					<tr>
+						<th>Correction</th>
+						<td>Automatic</td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-project">
+		<div class="panel-heading">Instructions</div>
+		<div class="panel-body">
+			<div>
+				<p>Your script will display a 5 days calendar starting from today if no argument is provided.</p>
+				<p><b>Exact</b> expected result must be like this (if we are the september 4th...):</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">$<span class="token operator">&gt;</span> ./calendar
+<span class="token operator">|</span> Monday           <span class="token operator">|</span> Tuesday          <span class="token operator">|</span> Wednesday        <span class="token operator">|</span> Thursday         <span class="token operator">|</span> Friday
+<span class="token operator">|</span> 04 September     <span class="token operator">|</span> 05 September     <span class="token operator">|</span> 06 September     <span class="token operator">|</span> 07 September     <span class="token operator">|</span> 08 September
+<span class="token operator">|</span>------------------<span class="token operator">|</span>------------------<span class="token operator">|</span>------------------<span class="token operator">|</span>------------------<span class="token operator">|</span>------------------
+<span class="token operator">|</span> Learning shell   <span class="token operator">|</span> Starting startup <span class="token operator">|</span> Selling businnes <span class="token operator">|</span> Flight to Bahama <span class="token operator">|</span> Checking hotel
+<span class="token operator">|</span>            08:00 <span class="token operator">|</span>            10:00 <span class="token operator">|</span>            14:00 <span class="token operator">|</span>            12:00 <span class="token operator">|</span>            11:00
+<span class="token operator">|</span> C/C++ programmat <span class="token operator">|</span>                  <span class="token operator">|</span>                  <span class="token operator">|</span>                  <span class="token operator">|</span> Beach time<span class="token operator">!</span>
+<span class="token operator">|</span>            14:00 <span class="token operator">|</span>                  <span class="token operator">|</span>                  <span class="token operator">|</span>                  <span class="token operator">|</span>            14:00
+$<span class="token operator">&gt;</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+				<p>Events can be added using --add argument (do not check the format of the argument, it's expected to be good):</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">$<span class="token operator">&gt;</span> ./calendar --add <span class="token string">"2018-10-04;08:00;C/C++ programmation"</span>
+Event added<span class="token operator">!</span>
+$<span class="token operator">&gt;</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+				<p>Adding an event on the same date/time is not an error.</p>
+				<p>Events are saved in current directory in a file named .calendar_datas (if file does not exists: no errors).</p>
+				<p>Events can also be removed with --delete argument:</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">$<span class="token operator">&gt;</span> ./calendar --delete <span class="token string">"2018-10-04;08:00"</span>
+Event removed<span class="token operator">!</span>
+$<span class="token operator">&gt;</span> ./calendar --delete <span class="token string">"2018-10-04;08:00"</span>
+Event not found<span class="token operator">!</span>
+$<span class="token operator">&gt;</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+				<p>Usage of temporarys files is authorized (but don't forget to delete them at the end of your script!).</p>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">Hints</div>
+		<div class="panel-body">
+			<div>
+				<ul>
+					<li>grep, sort, cut, sed, for/while, date, pr, read, |</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+</body></html>

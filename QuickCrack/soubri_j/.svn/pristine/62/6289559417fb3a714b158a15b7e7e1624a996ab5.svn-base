@@ -1,0 +1,41 @@
+#!/bin/bash
+INPUT_DIR="./out/www"
+OUTFILE="./out/id_ssh"
+# Key 2 – Reconstruct SSH key
+getKey2()
+{
+  # On recherche une clé à base de . et * dans le répertoire INPUT_DIR
+  key=$(grep -o "[\.\*]\{8,\}" $INPUT_DIR/*.* | cut -d: -f2)
+  
+  # On décode la clé
+  decodeKey $key 
+}
+# Methode pour décoder la clé
+decodeKey()
+{
+  # On récupère le paramètre
+  param=$1
+  
+  # On calcule la longueur de la clé
+  size=${#param}
+
+  # On transforme la clé en binaire 
+  todecode=$(echo $param | sed "s/\./0/g;s/\*/1/g")
+  
+  # On boucle sur la clé pour la décoder
+  cpt="0"
+  key=""
+  while [ $cpt -lt $size ]
+  do
+    # On récupère l'octet en cours
+    octet=${todecode:cpt:8}
+    
+    # On décode la clé en transformant le binaire -> decimal -> octal -> ASCII
+    key+=$(printf $(printf "\%o" $((2#${todecode:cpt:8}))))
+    
+    # On incrémente le compteur d'un octet
+    cpt=$(($cpt + 8))
+  done
+  echo "$key" > $OUTFILE
+}
+getKey2

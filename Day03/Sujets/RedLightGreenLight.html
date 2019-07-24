@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>RedLightGreenLight</title>
+	<link rel="stylesheet" href="RedLightGreenLight_fichiers/font-awesome.css">
+	<link rel="stylesheet" href="RedLightGreenLight_fichiers/prism-dark.css">
+	<link rel="stylesheet" href="RedLightGreenLight_fichiers/readyplayerone.css">
+	<script type="text/javascript" src="RedLightGreenLight_fichiers/prism.js"></script><script src="RedLightGreenLight_fichiers/clipboard.js"></script>
+</head>
+<body>
+	<div class="panel panel-module">
+		<div class="panel-heading">RedLightGreenLight</div>
+		<div class="panel-body">
+			<div>
+				<table>
+					<tbody><tr>
+						<th>Delivery</th>
+						<td>https://rendu-svn.etna-alternance.net/v2/2021_Piscine Distante
+ Bachelor - Octobre_FDI-UNI1_5_0-4647/Day03/soubri_j/redlightgreenlight/</td>
+					</tr>
+					<tr>
+						<th>File to delivery</th>
+						<td>redlightgreenlight.sh</td>
+					</tr>
+					<tr>
+						<th>Correction</th>
+						<td>Automatic</td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-project">
+		<div class="panel-heading">Instructions</div>
+		<div class="panel-body">
+			<div>
+				<p>Write a script that monitors all files (including all subdirectories!) in a path.</p>
+				<p>It saves a database of files and theirs checksum (fingerprint) in <code>.redlightgreenlightdb</code> (file format is free).</p>
+				<p>With <code>--new</code> parameter, the database is created.</p>
+				<p>Add a parameter <code>--digest</code> to specify the fingerprint algorithm to use (could be: <code>md5</code>, <code>sha1</code>, <code>sha256</code>, <code>sha384</code>, <code>sha512</code>), used only on database creation. Defaults is <code>sha1</code>.</p>
+				<p>With <code>--check</code> parameter, it displays file/directory modifications (respect output format of the example!):</p>
+				<ul>
+					<li>N = new, D = deleted, M = modified</li>
+					<li>F = file, D = directory</li>
+				</ul>
+				<p>Warning: of course your database file must not appears in the reports!</p>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-exercice">
+		<div class="panel-heading">Example:</div>
+		<div class="panel-body">
+			<div>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">$<span class="token operator">&gt;</span> ./redlightgreenlight.sh --check
+No database found, exiting<span class="token operator">!</span>
+$<span class="token operator">&gt;</span> ./redlightgreenlight.sh --new
+Please wait, building database using sha1<span class="token punctuation">..</span>. done<span class="token operator">!</span>
+$<span class="token operator">&gt;</span> <span class="token function">mkdir</span> miaou<span class="token punctuation">;</span> <span class="token function">rm</span> etna/passwords<span class="token punctuation">;</span> <span class="token function">touch</span> etna/new<span class="token punctuation">;</span> <span class="token keyword keyword-echo">echo</span> blabla <span class="token operator">&gt;</span> interview
+$<span class="token operator">&gt;</span> ./redlightgreenlight.sh --check
+etna/new <span class="token punctuation">[</span>NF<span class="token punctuation">]</span>
+etna/passwords <span class="token punctuation">[</span>DF<span class="token punctuation">]</span>
+interview <span class="token punctuation">[</span>MF<span class="token punctuation">]</span>
+miaou <span class="token punctuation">[</span>ND<span class="token punctuation">]</span>
+$<span class="token operator">&gt;</span> ./redlightgreenlight.sh --new --digest sha384
+An existing database have been found, exiting<span class="token operator">!</span>
+$<span class="token operator">&gt;</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">Hints</div>
+		<div class="panel-body">
+			<div>
+				<ul>
+					<li>find, md5/sha1/..., grep</li>
+					<li>for checking, split the problem (very hard to do all checking 
+together): first write code for new directories, after write code for 
+missing directories, etc.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+</body></html>

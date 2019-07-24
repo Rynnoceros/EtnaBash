@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>FDI-UNI1 - QuickCrack</title>
+	<link rel="stylesheet" href="QuickCrack_fichiers/font-awesome.css">
+	<link rel="stylesheet" href="QuickCrack_fichiers/prism-dark.css">
+	<link rel="stylesheet" href="QuickCrack_fichiers/readyplayerone.css">
+	<script type="text/javascript" src="QuickCrack_fichiers/prism.js"></script><script src="QuickCrack_fichiers/clipboard.js"></script>
+</head>
+<body>
+	<div class="panel panel-module">
+		<div class="panel-heading">FDI-UNI1</div>
+		<div class="panel-body">
+			<div>
+				<table>
+					<tbody><tr>
+						<th>Delivery</th>
+						<td>https://rendu-svn.etna-alternance.net/v2/2021_Piscine Distante Bachelor - Octobre_FDI-UNI1_5_0-4647/Quick Crack/soubri_j</td>
+					</tr>
+					<tr>
+						<th>Delivery</th>
+						<td>quickCrack.sh</td>
+					</tr>
+					<tr>
+						<th>Correction</th>
+						<td>Defense</td>
+					</tr>
+					<tr>
+						<th>Time</th>
+						<td>1.5 days</td>
+					</tr>
+					<tr>
+						<th>Group size</th>
+						<td>Alone</td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-project">
+		<div class="panel-heading">QuickCrack</div>
+		<div class="panel-body">
+			<div>
+				<p>You will try to find the Easter Egg of the OASIS. You need 4 keys to achieve it!</p>
+				<p>Every test must be solved as quick as possible: you need to build a bot for each of them!</p>
+				<p>All the bots must be merged into one single script 
+«&nbsp;quickCrack.sh&nbsp;», and this script must be totally automatic 
+(no user interaction). It will accept a single parameter: the IP address
+ of the OASIS server.</p>
+				<p>Of course, you don’t have access to the server for now, only during your final presentation!</p>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">Informations</div>
+		<div class="panel-body">
+			<div>
+				<ul>
+					<li>Try all keys (if you are blocked to key 1, try key 2, etc.).</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-exercice">
+		<div class="panel-heading">Key 1 – Crack OASIS access code</div>
+		<div class="panel-body">
+			<div>
+				<p>OASIS server can be accessed on this URL&nbsp;: http://&lt;IP&gt;/login.php (IP is the parameter given to your script).</p>
+				<p>You have to login with «&nbsp;halliday_j&nbsp;» and then «&nbsp;force&nbsp;» the 4 digits password.</p>
+				<p>Your script have to try all combinations until it gets an Apache 
+file list (be careful: a success login is generating a HTTP redirection 
+that you need to follow).</p>
+				<p>When you get the files list, download all files.</p>
+				<p>Provided examples:</p>
+				<ul>
+					<li>HTML output of login.php (“login.php.html”)</li>
+					<li>Apache files list (“apachedirectorylisting.html.sample”)</li>
+				</ul>
+				<p>Expected result:</p>
+				<ul>
+					<li>All files must be downloaded in «&nbsp;./out/www/&nbsp;»</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">Hints:</div>
+		<div class="panel-body">
+			<div>
+				<ul>
+					<li>CURL + GREP + CUT</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-exercice">
+		<div class="panel-heading">Key 2 – Reconstruct SSH key</div>
+		<div class="panel-body">
+			<div>
+				<p>One of the previously downloaded files (filename is random, you 
+need to find which one is the good one in your “out/www” directory) is 
+the SSH key* in binary format&nbsp;where zeros are «&nbsp;.&nbsp;» and 1
+ are «&nbsp;*&nbsp;».</p>
+				<p>Every eight characters group is giving you 1 character (ASCII code).</p>
+				<p>Return files should be kept.</p>
+				<p>Example:</p>
+				<ul>
+					<li>Content:		.*****...*.***....*.****.*****....**..**..**.***..**.*....**...*</li>
+					<li>“Decoded” content:&nbsp;	|\/|3741</li>
+				</ul>
+				<p>Provided example:</p>
+				<ul>
+					<li>A ssh key (id_ssh.sample)</li>
+				</ul>
+				<p>Expected result:</p>
+				<ul>
+					<li>Key must be saved in «&nbsp;./out/id_ssh&nbsp;»</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">Hints:</div>
+		<div class="panel-body">
+			<div>
+				<ul>
+					<li>GREP, SED, PRINTF, READ, WHILE, FILE, GUNZIP</li>
+					<li>a SSH key is a file that replaced password for authentication 
+using asymetric cryptography. It allows “automatic” connection, but in a
+ more secured way.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-exercice">
+		<div class="panel-heading">Key 3 – Find and retrieve files using clues</div>
+		<div class="panel-body">
+			<div>
+				<p>You can now login into OASIS using SSH protocol with user “halliday_j” and the SSH key.</p>
+				<p>There is a lot of files on the server (in a full hierarchy with 
+directories and sub-directories): you cannot download everything.</p>
+				<p>But during your visit in Archives you have discovered that:</p>
+				<ul>
+					<li>The file containing all passwords has the format “user:password_crypted”</li>
+					<li>It has been modified less than a week ago</li>
+					<li>The complete plans of Doom Castle are in several PDF files and 
+their names are terminating by page number (-XX, example: 45gfdgfdg77-01
+ )</li>
+				</ul>
+				<p>You need to get:</p>
+				<ul>
+					<li>The passwords file</li>
+					<li>All plans renamed “PLAN-XX.PDF”</li>
+				</ul>
+				<p>Expected result:</p>
+				<ul>
+					<li>file must be saved in «&nbsp;./out/passwd.shadow&nbsp;»</li>
+					<li>plans in «&nbsp;./out/plans/&nbsp;» directory</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">Hints:</div>
+		<div class="panel-body">
+			<div>
+				<ul>
+					<li>SSH/SCP, FIND, FILE</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-exercice">
+		<div class="panel-heading">Key 4 – Uncrypt the OASIS password</div>
+		<div class="panel-body">
+			<div>
+				<p>To crack encrypted passwords you will use a “password 
+dictionary”, available on http://&lt;IP&gt;/dictpasswords.txt . Each 
+line contains a single element.</p>
+				<p>You must try all possible combinations of elements of this file 
+because the password is a combination of elements of the dictionary. 
+However an element is never repeated twice. You also need to try 
+uppercase version of element (but try only all uppercase or lowercase 
+element, but not a mixed).</p>
+				<p>Example, if the dictionary contains:</p>
+				<ul>
+					<li>word</li>
+					<li>verb</li>
+					<li>01</li>
+					<li>02</li>
+				</ul>
+				<p>Your script must try&nbsp;(some examples):</p>
+				<ul>
+					<li>word</li>
+					<li>WORDverb01</li>
+					<li>verbWORD0201</li>
+					<li>But not:</li>
+					<ul>
+						<li>wORd</li>
+						<li>WORDword</li>
+					</ul>
+				</ul>
+				<p>Please note that all passwords are using the same crypto</p>
+				<p>How-to decrypt: «&nbsp;openssl aes-256-cbc -d -a -k &lt;password&gt;&nbsp;»</p>
+				<p>Bonus:</p>
+				<ul>
+					<li>progression bar!</li>
+				</ul>
+				<p>Expected output:</p>
+				<ul>
+					<li>A file «&nbsp;./out/passwd&nbsp;» containing all decrypted passwords (format user:password)</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">Hints:</div>
+		<div class="panel-body">
+			<div>
+				<ul>
+					<li>LOOPS, TR, CUT</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</body></html>

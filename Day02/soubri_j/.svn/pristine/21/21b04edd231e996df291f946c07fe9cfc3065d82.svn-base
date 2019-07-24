@@ -1,0 +1,61 @@
+#!/bin/bash
+WORD=""
+FILES=""
+NB_SOURCE="0"
+IS_EASY="1"
+DATABASE_FILE=".database"
+checkParameters()
+{
+  while [ $# -gt 0 ]
+  do
+    if [ $1 == "--source" ]
+      then
+        NB_SOURCE=$(echo "v=$NB_SOURCE;v+=1;v" | bc)
+        if [ "$2" ]
+          then 
+            cat $2 &> /dev/null
+            if [ $? -gt 0 ]
+              then
+                echo "$2 cannot be read!"
+	        exit 1
+            else
+              readFile $2
+            fi
+        else
+          echo "Incorrect usage!"
+          exit 2
+        fi
+    elif [ $1 == "--easy" ]
+      then
+        IS_EASY="0"
+    fi
+    shift 1
+  done
+
+  if [ $NB_SOURCE -le 0 ]
+    then
+      echo "No source have been provided!"
+      exit 3
+  elif [ "$FILES" ]
+    then
+      echo "Incorrect usage!"
+      exit 2
+  fi
+}
+readFile()
+{
+  cat $1 >> $DATABASE_FILE
+}
+deleteFile()
+{
+  rm $DATABASE_FILE
+}
+getRandomWord()
+{
+  nbLines=$(wc -l $DATABASE_FILE | cut -d. -f1)
+  WORD=$(tail -n $(($RANDOM%$nbLines+1)) $DATABASE_FILE | head -n 1)
+  echo $WORD
+}
+checkParameters $@
+getRandomWord
+deleteFile

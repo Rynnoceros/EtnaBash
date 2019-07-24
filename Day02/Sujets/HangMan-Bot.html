@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>HangMan-Bot</title>
+	<link rel="stylesheet" href="HangMan-Bot_fichiers/font-awesome.css">
+	<link rel="stylesheet" href="HangMan-Bot_fichiers/prism-dark.css">
+	<link rel="stylesheet" href="HangMan-Bot_fichiers/readyplayerone.css">
+	<script type="text/javascript" src="HangMan-Bot_fichiers/prism.js"></script><script src="HangMan-Bot_fichiers/clipboard.js"></script>
+</head>
+<body>
+	<div class="panel panel-module">
+		<div class="panel-heading">Hangman-Bot</div>
+		<div class="panel-body">
+			<div>
+				<table>
+					<tbody><tr>
+						<th>Delivery</th>
+						<td>https://rendu-svn.etna-alternance.net/v2/2021_Piscine Distante Bachelor - Octobre_FDI-UNI1_5_0-4647/Day02/soubri_j/hangman-bot/</td>
+					</tr>
+					<tr>
+						<th>File to delivery</th>
+						<td>hangman-bot.sh</td>
+					</tr>
+					<tr>
+						<th>Correction</th>
+						<td>Automatic</td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-project">
+		<div class="panel-heading">Instructions</div>
+		<div class="panel-body">
+			<div>
+				<p>Now wrote a script that can solve the game (your first bot!).</p>
+				<p>As the game script, it accepts several sources.</p>
+				<p>And, with <code>--game</code> option you specify the path to the game.</p>
+				<p>It starts by invoking the game and reading mistery length.</p>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-exercice">
+		<div class="panel-heading">Level1 (not really a winner...)</div>
+		<div class="panel-body">
+			<div>
+				<p>Your scripting is just entering random letter. But never the same :)</p>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-exercice">
+		<div class="panel-heading">Level2 (now, it can win!)</div>
+		<div class="panel-body">
+			<div>
+				<p>Your scripting is getting some IA: it checks in databases for current matches and if only one word found it proposing it.</p>
+				<p>With <code>grep</code>, you can use <code>.</code> in the search string as a wildcard: it means that any character (but exactly one) can be at the <code>.</code> place.</p>
+				<p>Reminder: <code>^</code> means "at the begin of the line", <code>$</code> means "no content after" (end of line).</p>
+				<p>Example:</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash"><span class="token comment"># grep '^r..t:' /etc/passwd</span>
+root:<span class="token punctuation">[</span><span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+<span class="token comment">#</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-exercice">
+		<div class="panel-heading">Level3 (we have a winner)</div>
+		<div class="panel-body">
+			<div>
+				<p>From databases, it decided which letter to offer, with this algorithm:</p>
+				<ul>
+					<li>first, it makes a list of possible "matches" depending of the length and already discovered letters (as in level2)</li>
+					<li>from this list it choose the best candidate</li>
+				</ul>
+				<p>Example 1:</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">mistery:		____
+list is: 		tree four five dogs love
+it will try <span class="token string">"f"</span>, because 2 matches starting with a f
+mistery:		b___
+list is: 		bike boat bite
+it will try <span class="token string">"i"</span> <span class="token punctuation">(</span>because there is 2 matches <span class="token keyword keyword-for">for</span> it<span class="token punctuation">)</span>
+mistery:		____
+list is: 		bike boat
+it will try b first <span class="token punctuation">(</span>sure<span class="token punctuation">)</span>, and <span class="token keyword keyword-then">then</span> <span class="token string">"i"</span> or <span class="token string">"o"</span> randomly<span class="token punctuation">..</span>.</code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+				<p>Example 2:</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">$<span class="token operator">&gt;</span> ./hangman-bot.sh --game ./hangman2.sh --source data.txt --source data2.txt
+New game<span class="token operator">!</span>
+Mistery: _________ <span class="token punctuation">(</span>9 letters, 10 tries left<span class="token punctuation">)</span>
+<span class="token operator">=</span><span class="token operator">&gt;</span> I<span class="token string">'m trying Z !
+Previous propositions were: Z
+Mistery: _________ (9 letters, 9 tries left)
+=&gt; I'</span>m trying I <span class="token operator">!</span>
+I found<span class="token operator">!</span>
+Mistery: ___I_____ <span class="token punctuation">(</span>9 letters, 9 tries left<span class="token punctuation">)</span>
+<span class="token operator">=</span><span class="token operator">&gt;</span> I'm sure the answer is MACINTOSH <span class="token operator">!</span>
+Previous propositions were: Z I
+Mistery: ___I_____ <span class="token punctuation">(</span>9 letters, 9 tries left<span class="token punctuation">)</span>
+MACINTOSH was the mistery<span class="token operator">!</span> You win<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+$<span class="token operator">&gt;</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">Hints</div>
+		<div class="panel-body">
+			<div>
+				<ul>
+					<li>cut, wc, grep, sort, cut, wc</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+</body></html>

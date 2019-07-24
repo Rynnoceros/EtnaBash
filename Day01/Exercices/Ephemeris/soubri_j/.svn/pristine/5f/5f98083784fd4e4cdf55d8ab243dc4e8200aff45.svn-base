@@ -1,0 +1,9 @@
+#!/bin/bash
+displayDays()
+{
+  for DATE in $(date) $(date -v+1d)
+  do
+    echo $DATE
+  done
+}
+echo displayDays()

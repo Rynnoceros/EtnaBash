@@ -1,0 +1,26 @@
+#!/bin/bash
+#######################
+### QUICK CRACK BOT ###
+#######################
+IP_ADDRESS=""
+LOGIN="halliday_j"
+CURRENT_PASSWORD="0"
+
+# Get IP adress of the server to crack
+getIP()
+{
+  IP_ADDRESS=$1
+}
+
+# Key 1 – Crack OASIS access code
+getKey1()
+{
+  LOGIN="halliday_j"
+  CURRENT_PASSWORD="0"
+
+  while [ $CURRENT_PASSWORD -le 9999 ] && [ $TROUVE -eq 1 ]
+  do
+    
+  done
+}
+getIP $@

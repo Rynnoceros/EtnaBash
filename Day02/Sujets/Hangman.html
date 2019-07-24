@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Hangman</title>
+	<link rel="stylesheet" href="Hangman_fichiers/font-awesome.css">
+	<link rel="stylesheet" href="Hangman_fichiers/prism-dark.css">
+	<link rel="stylesheet" href="Hangman_fichiers/readyplayerone.css">
+	<script type="text/javascript" src="Hangman_fichiers/prism.js"></script><script src="Hangman_fichiers/clipboard.js"></script>
+</head>
+<body>
+	<div class="panel panel-module">
+		<div class="panel-heading">Hangman</div>
+		<div class="panel-body">
+			<div>
+				<table>
+					<tbody><tr>
+						<th>Delivery</th>
+						<td>https://rendu-svn.etna-alternance.net/v2/2021_Piscine Distante Bachelor - Octobre_FDI-UNI1_5_0-4647/Day02/soubri_j/hangman/</td>
+					</tr>
+					<tr>
+						<th>File to delivery</th>
+						<td>hangman.sh</td>
+					</tr>
+					<tr>
+						<th>Correction</th>
+						<td>Automatic</td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-project">
+		<div class="panel-heading">Instructions</div>
+		<div class="panel-body">
+			<div>
+				<p>Write a hangman game in shell.</p>
+				<p>Your script must be named <code>hangman</code> and accept one or more files in arguments, with option <code>--source</code>.</p>
+				<p>Those files are words databases for your game. There are text file, each one being a word, example:</p>
+				<ul>
+					<li><code>prepetna</code></li>
+					<li><code>Piscine</code></li>
+					<li><code>test</code></li>
+				</ul>
+				<p>Your script is starting by picking up (randomly) a word in those files.</p>
+				<p>If the option <code>--easy</code> has been used, you are revealing the first and last letter of the mystery.</p>
+				<p>Of course options can be specified in any order.</p>
+				<p>Corrects invokations are:</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">./hangman.sh --source d.txt --easy --source f.txt</code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+				<p>Incorrects invokations are (with errors that your script must display):</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">$<span class="token operator">&gt;</span> ./hangman.sh
+No <span class="token function">source</span> have been provided<span class="token operator">!</span>
+$<span class="token operator">&gt;</span> ./hangman.sh --easy
+No <span class="token function">source</span> have been provided<span class="token operator">!</span>
+$<span class="token operator">&gt;</span> ./hangman.sh --source
+Incorrect usage<span class="token operator">!</span>
+$<span class="token operator">&gt;</span> ./hangman.sh --source --easy
+--easy cannot be read<span class="token operator">!</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+				<p>Then ask user for an input, after displaying some information (see examples).</p>
+				<p>If the user enter a single letter, every occurance of the letter 
+is discovered. If every letters have been discovered, the user wins.</p>
+				<p>If the user enter a previously enterred letter, nothing is happening (asking for another input).</p>
+				<p>If the letter is not found if the word, user is losing one try.</p>
+				<p>If the user enter a word, and the word is correct, he wins. If it's incorrect, he is losing 2 tries.</p>
+				<p>After 10 fails, he loose the game, and the word is revealed.</p>
+				<p>Words can be provided in lower or uppercase. Same for user input. But your game must not be case sensitive!</p>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">Hints</div>
+		<div class="panel-body">
+			<div>
+				<ul>
+					<li>shift, sed, read, while, random, head, tail, wc, tr, grep, ${::}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-exercice">
+		<div class="panel-heading">Examples</div>
+		<div class="panel-body">
+			<div>
+				<p>Example 1:</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">$<span class="token operator">&gt;</span> ./hangman.sh --source data.txt --source data2.txt
+Mystery: _________ <span class="token punctuation">(</span>9 letters, 10 tries left<span class="token punctuation">)</span>
+Enter a letter or a word:
+z                 		/* <span class="token punctuation">(</span>user typing <span class="token string">'Z'</span><span class="token punctuation">)</span> */
+Z not found<span class="token operator">!</span>
+Previous letters propositions were: Z
+Mystery: _________ <span class="token punctuation">(</span>9 letters, 9 tries left<span class="token punctuation">)</span>
+Enter a letter or a word:
+I                 		/* <span class="token punctuation">(</span>user typing <span class="token string">'Z'</span><span class="token punctuation">)</span> */
+I found<span class="token operator">!</span>
+Previous letters propositions were: Z I
+Mystery: ___I_____ <span class="token punctuation">(</span>9 letters, 9 tries left<span class="token punctuation">)</span>
+Enter a letter or a word:
+MACINTOSH
+MACINTOSH was the mystery<span class="token operator">!</span> You win<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+$<span class="token operator">&gt;</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+				<p>Example 2:</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">$<span class="token operator">&gt;</span> ./hangman.sh --easy --source /tmp/data.txt
+Mystery: S_X <span class="token punctuation">(</span>3 letters, 10 tries left<span class="token punctuation">)</span>
+Enter a letter or a word:
+SEX
+SEX is not the mystery<span class="token operator">!</span>
+Previous letters propositions were:
+Mystery: S_X <span class="token punctuation">(</span>3 letters, 8 tries left<span class="token punctuation">)</span>
+Enter a letter or a word:
+I
+I found<span class="token operator">!</span>
+You have discovered the mystery: SIX<span class="token operator">!</span> You win<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+$<span class="token operator">&gt;</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+				<p>Example 3:</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">/* some running */
+Previous letters propositions were: Q Y X
+Mystery: S_X <span class="token punctuation">(</span>3 letters, 1 tries left<span class="token punctuation">)</span>
+Enter a letter or a word:
+P
+P not found<span class="token operator">!</span>
+No <span class="token function">more</span> tries<span class="token operator">!</span> LOOSER<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+Mystery was: SIX
+$<span class="token operator">&gt;</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+			</div>
+		</div>
+	</div>
+
+
+</body></html>

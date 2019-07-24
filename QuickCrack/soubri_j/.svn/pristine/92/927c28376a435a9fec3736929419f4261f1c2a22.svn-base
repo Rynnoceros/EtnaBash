@@ -1,0 +1,57 @@
+#!/bin/bash
+OUTFILE="./out/id_ssh"
+IP_ADDRESS="163.5.245.214"
+LOGIN="halliday_j"
+OUTPLANS="./out/plans/"
+OUT="./out"
+###################################################
+### Key 3 – Find and retrieve files using clues ###
+###################################################
+
+# Methode pour creer les repertoires de destination
+createDirectories()
+{
+  # On créé le répertoire pour le fichier de mot de passe
+  mkdir -p $OUT
+
+  # On créé le répertoire pour les plans
+  mkdir -p $OUTPLANS 
+}
+# Methode pour se connecter au server en ssh
+connectToServer()
+{
+  cpt="0"
+
+  echo "Connecting to server $IP_ADDRESS in SSH"
+  
+  # On se connecte au serveur en SSH
+  ssh -i ./OUTFILE -l $LOGIN $IP_ADDRESS
+
+  # Si on a réussi à se connecter on commence à télécharger les fichiers
+  if [ $? -eq 0 ]
+  then
+    echo "Connected"
+    
+    # On récupère le fichier de mots de passe
+    retrivePaswwords
+   
+    # On récupère les plans
+    retrievePlans
+  fi
+}
+
+# Methode pour récupérer les plans
+retrievePlans()
+{
+  for file in $(find . | grep "^[[:alpha:]]*.*\-[[:digit:]]\{2\}$")
+  do
+    echo "Retrieving file $file"
+    
+  done
+}
+
+# Methode pour récupérer le fichier des mots de passe
+retrievePasswords()
+{
+  echo "TODO"
+}

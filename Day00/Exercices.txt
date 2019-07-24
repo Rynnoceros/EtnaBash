@@ -1,0 +1,37 @@
+stage00: Affichage du contenu de la variable d'environnement SHELL
+echo $SHELL
+
+stage01: Definir une variable LC_CTYPE à la valeur C
+LC_CTYPE="C"
+
+stage02: Definir une variable myvar à la valeur "hello world, give me some $$ !"
+my_var='hello world, give me some $$ !'
+
+stage03: Copy /etc/passwd and /etc/group into /tmp/mess
+cd /tmp
+mkdir mess
+cp /etc/passwd ./mess
+cp /etc/group ./mess
+ls -la ./mess
+
+stage04: idem stage03
+mkdir -p ~/home/mess
+cp /etc/passwd ~/home/mess
+cp /etc/group ~/home/mess
+ls -la ~/home/mess
+
+stage 05: 
+my_varf=$(echo "$my_var" | tr -c -d "[:alpha:]")
+echo $my_varf
+
+stage06:
+echo $my_varf | fold -w 4 | head -n 1
+
+stage07:
+echo $(($RANDOM%6+1))
+
+stage08:
+tail -n $(($RANDOM%$(wc -l /etc/passwd | tr -c -d "[:digit:]"))) /etc/passwd | head -n 1
+
+stage09:
+

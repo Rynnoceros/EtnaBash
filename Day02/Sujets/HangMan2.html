@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>HangMan2</title>
+	<link rel="stylesheet" href="HangMan2_fichiers/font-awesome.css">
+	<link rel="stylesheet" href="HangMan2_fichiers/prism-dark.css">
+	<link rel="stylesheet" href="HangMan2_fichiers/readyplayerone.css">
+	<script type="text/javascript" src="HangMan2_fichiers/prism.js"></script><script src="HangMan2_fichiers/clipboard.js"></script>
+</head>
+<body>
+	<div class="panel panel-module">
+		<div class="panel-heading">HangMan2</div>
+		<div class="panel-body">
+			<div>
+				<table>
+					<tbody><tr>
+						<th>Delivery</th>
+						<td>https://rendu-svn.etna-alternance.net/v2/2021_Piscine Distante Bachelor - Octobre_FDI-UNI1_5_0-4647/Day02/soubri_j/hangman2/</td>
+					</tr>
+					<tr>
+						<th>File to delivery</th>
+						<td>hangman2.sh</td>
+					</tr>
+					<tr>
+						<th>Correction</th>
+						<td>Automatic</td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-project">
+		<div class="panel-heading">Instructions</div>
+		<div class="panel-body">
+			<div>
+				<p>Modify the hangman script for making the game asynchronous.</p>
+				<p>To achieve this, you need to store some datas in a file <code>.hangmanstate</code> in current directory.</p>
+				<p>When the game is over, delete that file.</p>
+				<p>Your script get the user proposition from <code>STDIN</code>.</p>
+				<p>To start a new game, the user must use option <code>-n</code> (short version) or <code>--new</code> (long version). When using this option, no input is required from the user.</p>
+				<p>How to store datas ?</p>
+				<p>Store datas in <code>script</code> format, so you can simply include that file in your script to read it (with <code>.</code>).</p>
+				<p>Example:</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">mystery<span class="token operator">=</span><span class="token string">"SCOOBIDOO"</span>
+found<span class="token operator">=</span><span class="token string">"_________"</span>
+triesleft<span class="token operator">=</span>8
+propositions<span class="token operator">=</span><span class="token string">" Z I"</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+				<p>Example 1 with V2:</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">$<span class="token operator">&gt;</span> ./hangman2.sh -n --source data.txt --source data2.txt
+New game<span class="token operator">!</span>
+Mystery: _________ <span class="token punctuation">(</span>9 letters, 10 tries left<span class="token punctuation">)</span>
+$<span class="token operator">&gt;</span> ./hangman2.sh
+Previous letters propositions were:
+Mystery: _________ <span class="token punctuation">(</span>9 letters, 10 tries left<span class="token punctuation">)</span>
+I                 		/* <span class="token punctuation">(</span>user typing <span class="token string">'Z'</span><span class="token punctuation">)</span> */
+I found<span class="token operator">!</span>
+Mystery: ___I_____ <span class="token punctuation">(</span>9 letters, 10 tries left<span class="token punctuation">)</span>
+$<span class="token operator">&gt;</span> <span class="token keyword keyword-echo">echo</span> a <span class="token operator">|</span> ./hangman2.sh
+Previous letters propositions were: I
+Mystery: ___I_____ <span class="token punctuation">(</span>9 letters, 10 tries left<span class="token punctuation">)</span>
+Z                 		/* <span class="token punctuation">(</span>user typing <span class="token string">'Z'</span><span class="token punctuation">)</span> */
+Z not found<span class="token operator">!</span> 9 tries left<span class="token operator">!</span>
+$<span class="token operator">&gt;</span> <span class="token keyword keyword-echo">echo</span> MACINTOSH <span class="token operator">|</span> ./pendu.sh
+Previous propositions were: I Z
+Mystery: ___I_____ <span class="token punctuation">(</span>9 letters, 9 tries left<span class="token punctuation">)</span>
+MACINTOSH was the mistery<span class="token operator">!</span> You win<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+$<span class="token operator">&gt;</span> ./hangman2.sh
+No game <span class="token keyword keyword-in">in</span> progress and no <span class="token function">source</span> provided<span class="token operator">!</span> Exiting<span class="token operator">!</span>
+$<span class="token operator">&gt;</span> ./hangman2.sh -n
+No <span class="token function">source</span> have been provided<span class="token operator">!</span>
+$<span class="token operator">&gt;</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+			</div>
+		</div>
+	</div>
+
+
+</body></html>

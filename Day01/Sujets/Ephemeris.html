@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Ephemeris</title>
+	<link rel="stylesheet" href="Ephemeris_fichiers/font-awesome.css">
+	<link rel="stylesheet" href="Ephemeris_fichiers/prism-dark.css">
+	<link rel="stylesheet" href="Ephemeris_fichiers/readyplayerone.css">
+	<script type="text/javascript" src="Ephemeris_fichiers/prism.js"></script><script src="Ephemeris_fichiers/clipboard.js"></script>
+</head>
+<body>
+	<div class="panel panel-module">
+		<div class="panel-heading">Ephemeris</div>
+		<div class="panel-body">
+			<div>
+				<table>
+					<tbody><tr>
+						<th>Delivery</th>
+						<td>https://rendu-svn.etna-alternance.net/v2/2021_Piscine Distante Bachelor - Octobre_FDI-UNI1_5_0-4647/Day01/soubri_j/ephemeris/</td>
+					</tr>
+					<tr>
+						<th>File to delivery</th>
+						<td>ephemeris.sh</td>
+					</tr>
+					<tr>
+						<th>Correction</th>
+						<td>Automatic</td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-project">
+		<div class="panel-heading">Instructions</div>
+		<div class="panel-body">
+			<div>
+				<p>Make a "ephemeris" script, it displays:</p>
+				<ul>
+					<li>the day and the date</li>
+					<li>sunrise/sunset time</li>
+					<li>the ISS (International Space Station) location</li>
+					<li>the current distance between ISS and us !</li>
+				</ul>
+				<p>It accepts an <code>optional</code> parameter: the API URL for ISS location. If not specified it will be "http://api.open-notify.org/iss-now.json".</p>
+				<p>Expected <b>exact format</b> result:</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash">$<span class="token operator">&gt;</span> ./ephemeris.sh
+Today we are Tuesday September  4, 2018.
+Sunrise is expected at 5:12:13 AM and sunset at 6:26:23 PM.
+The ISS is currently located at -30.1461, -50.7975: 10010km from us<span class="token operator">!</span>
+$<span class="token operator">&gt;</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">Where I can find the data?</div>
+		<div class="panel-body">
+			<div>
+				<ul>
+					<li>ISS location: <a href="http://api.open-notify.org/iss-now.json">http://api.open-notify.org/iss-now.json</a></li>
+					<li>Sunset/sunrise: <a href="ttps://sunrise-sunset.org/api">https://sunrise-sunset.org/api</a></li>
+					<li>ETNA location is: <code>48.813875</code>, <code>2.392521</code></li>
+					<li>PI value is: <code>3.14159265358</code></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">How can i calculate the distance between coordinates (lat1, lon1) and (lat2, lon2)?</div>
+		<div class="panel-body">
+			<div>
+				<pre class="language-markup code-toolbar"><code class=" language-markup">earthRadiusKm = 6371;
+dLat = (lat2 - lat1) * PI / 180;
+dLon = (lon2 - lon1) * PI / 180;
+l1 = (lat1) * PI / 180;
+l2 = (lat2) * PI / 180;
+a = sinus(dLat/2) * sinus(dLat/2) + sinus(dLon/2) * sinus(dLon/2) * cosine(l1) * cosine(l2);
+result = 2 * atan2(sqrt(a), sqrt(1-a)) * eathRadiusKm;</code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">Hints</div>
+		<div class="panel-body">
+			<div>
+				<p>date (+man strftime), curl, bc</p>
+				<p>To calculate <code>atan2</code> please use the following <code>awk</code>:</p>
+				<pre class="language-bash code-toolbar"><code class=" language-bash"><span class="token keyword keyword-echo">echo</span> 50 25 <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print atan2(<span class="token variable">$1</span>,<span class="token variable">$2</span>)}'</span></code><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></pre>
+				<p>It's possible to use <code>awk</code> for the whole calculation, but I recommand you to use bc instead.</p>
+			</div>
+		</div>
+	</div>
+
+
+</body></html>

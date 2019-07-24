@@ -1,0 +1,161 @@
+@font-face {
+	font-family: 'orbitron';
+	src: url('gamification/orbitron-regular-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'orbitron';
+	src: url('gamification/orbitron-bold-webfont.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+orbitron-bold-webfont.woff
+
+html, body { padding: 0; margin: 0; }
+
+body {
+	margin: 40px;
+	background-color: #0e2334;
+	font-family: "orbitron";
+	font-size: 15px;
+	color: #fff;
+}
+
+h1, h2, h3, h4, h5 {
+	display: inline-block;
+	font-weight: bold;
+	font-size: inherit;
+}
+
+ul { margin: 0 0 15px; }
+div > ul { padding: 0; }
+li { line-height: 150%; }
+ul, li { list-style-type: none; }
+li::before {
+	font-family: "FontAwesome";
+	content: "\f111";
+	margin-right: 1.5em;
+	font-size: 8px;
+	vertical-align: middle;
+	color: var( --panel-color );
+	list-style-type: none; /* A supprimer quand les sujets seront tous syntaxiquement correct */
+}
+
+p {
+	margin: 15px 0;
+	line-height: 18px;
+}
+
+pre {
+	border-left: 5px solid #000;
+}
+
+code {
+	display: inline-block;
+	padding: 0 .2em;
+	border-radius: 4px;
+	font-weight: bold;
+	background-color: #333;
+}
+
+table {
+	overflow: hidden;
+	width: 100%;
+	border-spacing: 1px;
+	box-sizing: border-box;
+	color: inherit;
+	text-align: left;
+}
+tr th:first-child,
+tr td:first-child {
+	white-space: nowrap;
+	color: #06db05;
+}
+tr {
+	padding: 0;
+}
+tr:nth-child( 2n ) {
+}
+td, th {
+	padding: .7em 1em;
+}
+td:last-child {
+	width: 100%;
+}
+
+.panel {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+	.panel-heading {
+		margin-bottom: 6px;
+		font-weight: bold;
+		font-size: 1.8em;
+		border: 18px solid;
+		border-image: url( "gamification/titre.png" ) 174;
+		background-color: #1b81ae;
+		background-size: 32px;
+		color: #fff;
+		font-family: "orbitron";
+		font-weight: bold;
+	}
+		.panel-heading::before {
+			font-family: "FontAwesome";
+			margin-right: 15px;
+			font-weight: normal;
+		}
+		.panel-body {
+			padding-top: 1em;
+			border: 30px solid;
+			border-image: url( "gamification/border.png" ) 120;
+		}
+		.panel-body > div {
+			position: relative;
+			margin: -25px;
+			padding: 1em 2em;
+			z-index: -1;
+			min-height: 60px;
+			background: center url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgb(7,95,115)' viewBox='0 0 100 169.5'%3E%3Cpolygon points='50,34.75 93.5,59.75 93.5,109.75 50,134.75 6.5,109.75 6.5,59.75'%3E%3C/polygon%3E%3Cpolygon points='0,-50 43.5,-25 43.5,25 0,50 -43.5,25 -43.5,-25'%3E%3C/polygon%3E%3Cpolygon points='100,-50 143.5,-25 143.5,25 100,50 56.5,25 56.5,-25'%3E%3C/polygon%3E%3Cpolygon points='0,119.5 43.5,144.5 43.5,194.5 0,219.5 -43.5,194.5 -43.5,144.5'%3E%3C/polygon%3E%3Cpolygon points='100,119.5 143.5,144.5 143.5,194.5 100,219.5 56.5,194.5 56.5,144.5'%3E%3C/polygon%3E%3C/svg%3E");
+			background-color: #126180;
+			background-size: 31px;
+			border-radius: 10px;
+		}
+
+
+	.panel-module .panel-heading {
+		background: url( "banniere.png" ) center right no-repeat;
+		background-size: 500px;
+		background-color: #1b81ae;
+	}
+
+	.panel-module    { --panel-color: #337ab7; }
+	.panel-project   { --panel-color: #22ad54; }
+	.panel-warning   { --panel-color: #ff9e49; }
+	.panel-forbidden { --panel-color: #ff7e7e; }
+	.panel-info      { --panel-color: #094563; }
+
+	.panel-warning .panel-heading,
+	.panel-forbidden .panel-heading,
+	.panel-info .panel-heading {
+		font-size: 1.5em;
+		color: var( --panel-color );
+	}
+
+.panel-module .panel-heading::before 	{ content: "\f085"; }
+.panel-project .panel-heading::before 	{ content: "\f02d"; }
+.panel-warning .panel-heading::before 	{ content: "\f071"; }
+.panel-forbidden .panel-heading::before { content: "\f05e"; }
+.panel-info .panel-heading::before 		{ content: "\f05a"; }
+.panel-exercice .panel-heading::before 	{ content: "\f15c"; }
+.panel-question .panel-heading::before 	{ content: "\f059"; }
+.panel-example .panel-heading::before 	{ content: "\f1c9"; }
+.panel-bonus .panel-heading::before 	{ content: "\f055"; }
+.panel-objective .panel-heading::before { content: "\f140"; }
+
+.cs-major::before { font-family: "FontAwesome"; content:"\f0aa"; color:#fd6767; margin-right: .2em; }
+.cs-minor::before { font-family: "FontAwesome"; content:"\f0ab"; color:#22ad54; margin-right: .2em; }
+.cs-info::before  { font-family: "FontAwesome"; content:"\f05a"; color:#6aabcc; margin-right: .2em; }
